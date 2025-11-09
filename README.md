@@ -1,1 +1,1 @@
-link tu the casle
+link to the castle
