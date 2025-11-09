@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Castello — Accesso</title>
+<style>
+  :root {
+    --bg:#0f1220; --text:#e9ecf1; --panel:rgba(255,255,255,.06); --border:rgba(255,255,255,.18); --accent:#ffd86b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,'Noto Sans','Liberation Sans',sans-serif;
+       min-height:100vh; display:grid; place-items:center; padding:20px;}
+  .wrap{ width:min(1100px,96vw); border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#111; box-shadow:0 24px 64px rgba(0,0,0,.45);}
+  img{ width:100%; height:auto; display:block; }
+  .bar{ display:flex; gap:10px; align-items:center; justify-content:center; padding:14px; background:var(--panel); border-top:1px solid var(--border);}
+  input[type=password]{ padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:#0e1222; color:var(--text); min-width:180px; font-size:16px; }
+  button{ padding:10px 14px; border-radius:10px; border:none; background:var(--accent); color:#1c1200; font-weight:800; cursor:pointer; font-size:16px; }
+  .msg{ text-align:center; font-size:14px; opacity:.8; margin:10px 0 14px; }
+  .err{ color:#ff8a80; min-height:18px; text-align:center; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <img src="castello.png" alt="Castello — clic per accedere">
+    <div class="bar">
+      <label for="pw" style="opacity:.9;">Inserisci pw:</label>
+      <input id="pw" type="password" placeholder="•••">
+      <button id="go">Entra</button>
+    </div>
+    <div class="msg">Dopo l'accesso verrai reindirizzato direttamente all'attività.</div>
+    <div id="err" class="err"></div>
+  </div>
+
+<script>
+  const DEST = "https://view.genially.com/6905f0203fd7e2c42084c907";
+  const PW = "171030";
+
+  const pw = document.getElementById('pw');
+  const go = document.getElementById('go');
+  const err = document.getElementById('err');
+
+  function unlock() {
+    if (pw.value.trim() === PW) {
+      window.location.href = DEST;
+    } else {
+      err.textContent = "Pw errata. Riprova.";
+      pw.focus(); pw.select();
+    }
+  }
+  go.addEventListener('click', unlock);
+  pw.addEventListener('keydown', (e)=>{ if(e.key==='Enter') unlock(); });
+</script>
+</body>
+</html>
